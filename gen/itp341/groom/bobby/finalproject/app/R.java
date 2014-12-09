@@ -18,7 +18,7 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f060025;
+        public static final int LinearLayout1=0x7f06002a;
         public static final int TableLayout1=0x7f060000;
         public static final int button1=0x7f060007;
         public static final int button10=0x7f060010;
@@ -50,13 +50,18 @@ public final class R {
         public static final int button7=0x7f06000d;
         public static final int button8=0x7f06000e;
         public static final int button9=0x7f06000f;
-        public static final int buttonStartScreen=0x7f060026;
+        public static final int buttonEasy=0x7f060025;
+        public static final int buttonHard=0x7f060028;
+        public static final int buttonMedium=0x7f060026;
+        public static final int buttonStartScreen=0x7f06002b;
         public static final int textView1=0x7f060001;
         public static final int textView2=0x7f060002;
         public static final int textView3=0x7f060003;
         public static final int textView4=0x7f060004;
         public static final int textView5=0x7f060005;
         public static final int textView6=0x7f060006;
+        public static final int textView7=0x7f060027;
+        public static final int textView8=0x7f060029;
     }
     public static final class layout {
         public static final int activity_game_board=0x7f030000;

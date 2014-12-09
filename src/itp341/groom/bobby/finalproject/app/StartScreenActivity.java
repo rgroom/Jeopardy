@@ -1,5 +1,8 @@
 package itp341.groom.bobby.finalproject.app;
 
+import com.parse.Parse;
+import com.parse.ParseObject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,6 +34,14 @@ public class StartScreenActivity extends Activity {
 			}
 		});
 		
+		
+		Parse.initialize(this, "CyO2nm8v8Ogr1OrGiDtsqSKZQjSUe2oA5KOyoRWX", "ZUtSPRwqXCd4TJjUQXStwWX5yfs8CFrxeHn2t5aH");
+		
+		
+		//got parse working
+//		ParseObject testObject = new ParseObject("TestObject");
+//		testObject.put("foo", "bar");
+//		testObject.saveInBackground();
 	}
 	
 	

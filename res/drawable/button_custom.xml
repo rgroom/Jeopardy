@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:drawable="@drawable/JeopardyBluePressed"
+          android:state_pressed="true"
+          android:layout_marginRight="4dp" />
+    <item android:drawable="@drawable/JeopardyBlueFocused"
+          android:state_focused="true"
+          android:layout_marginRight="4dp" />
+    <item android:drawable="@drawable/JeopardyBlue"
+        android:layout_marginRight="4dp" />
+
+</selector>

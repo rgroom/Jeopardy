@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Final.Project.Groom.Bobby</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="start_button">Let\'s Play Jeopardy!</string>
+    <string name="title_activity_game_setup">GameSetupActivity</string>
+    <string name="text_difficulty_selection">Please select a difficulty</string>
+    <string name="button_easy">Easy</string>
+    <string name="button_medium">Medium</string>
+    <string name="button_hard">Hard</string>
+    <string name="title_activity_game_board">GameBoardActivity</string>
+
+</resources>

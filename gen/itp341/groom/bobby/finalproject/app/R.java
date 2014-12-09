@@ -50,6 +50,7 @@ public final class R {
         public static final int button7=0x7f06000d;
         public static final int button8=0x7f06000e;
         public static final int button9=0x7f06000f;
+        public static final int buttonStartScreen=0x7f060026;
         public static final int textView1=0x7f060001;
         public static final int textView2=0x7f060002;
         public static final int textView3=0x7f060003;

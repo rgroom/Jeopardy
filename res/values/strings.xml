@@ -10,5 +10,10 @@
     <string name="button_medium">Medium</string>
     <string name="button_hard">Hard</string>
     <string name="title_activity_game_board">GameBoardActivity</string>
+    <string name="button_first_row">$200</string>
+    <string name="button_second_row">$400</string>
+    <string name="button_third_row">$600</string>
+    <string name="button_fourth_row">$800</string>
+    <string name="button_fifth_row">$1000</string>
 
 </resources>

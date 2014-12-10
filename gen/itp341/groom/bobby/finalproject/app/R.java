@@ -53,13 +53,16 @@ public final class R {
         public static final int buttonRow5Col4=0x7f060022;
         public static final int buttonRow5Col5=0x7f060023;
         public static final int buttonRow5Col6=0x7f060024;
-        public static final int buttonStartScreen=0x7f060031;
+        public static final int buttonStartScreen=0x7f060034;
+        public static final int buttonSubmitAnswer=0x7f060033;
+        public static final int editAnswer=0x7f060032;
         public static final int textCol1=0x7f060001;
         public static final int textCol2=0x7f060002;
         public static final int textCol3=0x7f060003;
         public static final int textCol4=0x7f060004;
         public static final int textCol5=0x7f060005;
         public static final int textCol6=0x7f060006;
+        public static final int textQuestion=0x7f060031;
         public static final int textView1=0x7f060025;
         public static final int textView2=0x7f06002f;
         public static final int textView3=0x7f060026;
@@ -72,7 +75,8 @@ public final class R {
     public static final class layout {
         public static final int activity_game_board=0x7f030000;
         public static final int activity_game_setup=0x7f030001;
-        public static final int activity_start_screen=0x7f030002;
+        public static final int activity_question=0x7f030002;
+        public static final int activity_start_screen=0x7f030003;
     }
     public static final class string {
         public static final int app_name=0x7f040000;
@@ -89,6 +93,7 @@ public final class R {
         public static final int text_difficulty_selection=0x7f040004;
         public static final int title_activity_game_board=0x7f040008;
         public static final int title_activity_game_setup=0x7f040003;
+        public static final int title_activity_question=0x7f04000e;
     }
     public static final class style {
         /** 

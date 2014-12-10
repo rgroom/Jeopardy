@@ -1,10 +1,12 @@
 package itp341.groom.bobby.finalproject.app;
 
-import java.util.ArrayList;
-
 import itp341.groom.bobby.finalproject.app.model.DataWrapper;
 import itp341.groom.bobby.finalproject.app.model.Question;
+
+import java.util.ArrayList;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -157,16 +159,18 @@ public class GameBoardActivity extends Activity implements View.OnClickListener{
 		bleh = bleh.replace("itp341.groom.bobby.finalproject.app:id/buttonRow", "");
 		String[] rowCol = bleh.split("Col");
 		String blah = v.getResources().getResourceName(v.getId());
-		Toast.makeText(getApplicationContext(), rowCol[0]+"x"+rowCol[1], Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getApplicationContext(), rowCol[0]+"x"+rowCol[1], Toast.LENGTH_SHORT).show();
 		
 		//(row-1)*6 + col
 		int row = Integer.parseInt(rowCol[0]);
 		int col = Integer.parseInt(rowCol[1]);
-		int index = (row-1)*6 + col;
+		int index = (row-1)*6 + col-1;
 		//questions.get(index).getQuestion() + "\n" + questions.get(index).getAnswer()
-		Toast.makeText(getApplicationContext(), questions.get(index).getQuestion() + "\n" + questions.get(index).getAnswer(), Toast.LENGTH_LONG).show();
+		//Toast.makeText(getApplicationContext(), questions.get(index).getQuestion() + "\n" + questions.get(index).getAnswer(), Toast.LENGTH_LONG).show();
 		
-		
+		Intent i = new Intent(getApplicationContext(), QuestionActivity.class);
+		i.putExtra(QuestionActivity.EXTRA_QUESTION, questions.get(index));
+		startActivityForResult(i, 0);
 //		switch (v.getId()) {
 //		case R.id.buttonRow1Col1:
 ////			String bleh = v.getResources().getResourceName(v.getId());

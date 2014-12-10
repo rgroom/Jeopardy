@@ -15,5 +15,6 @@
     <string name="button_third_row">$600</string>
     <string name="button_fourth_row">$800</string>
     <string name="button_fifth_row">$1000</string>
+    <string name="title_activity_question">QuestionActivity</string>
 
 </resources>

@@ -1,9 +1,13 @@
 package itp341.groom.bobby.finalproject.app;
 
+import itp341.groom.bobby.finalproject.app.model.DataWrapper;
+import itp341.groom.bobby.finalproject.app.model.Question;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +25,8 @@ public class GameSetupActivity extends Activity {
 
 	private final static String TAG = GameSetupActivity.class.getSimpleName();
 	
+	ArrayList<Question> gameQuestions;
+	
 	Button easyButton;
 	Button mediumButton;
 	Button hardButton;
@@ -30,6 +36,7 @@ public class GameSetupActivity extends Activity {
 		Log.d(TAG, "GameSetupActivity onCreate()");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game_setup);
+		gameQuestions = new ArrayList<Question>();
 		
 		easyButton = (Button) findViewById(R.id.buttonEasy);
 		mediumButton = (Button) findViewById(R.id.buttonMedium);
@@ -63,62 +70,51 @@ public class GameSetupActivity extends Activity {
 	
 	
 	public void easyStart() {
-		
+		ArrayList<ParseObject> questions = null;
+		Log.d(TAG, "easyStart()");
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Question");
 		query.whereEqualTo("difficulty", "easy");
-		//query.setLimit(10);
-//		query.findInBackground(new FindCallback<ParseObject>() {
-//			
-//			@Override
-//			public void done(List<ParseObject> questionList, ParseException e) {
-//				if (e != null) {
-//					
-//				}
-//				
-//				
-//			}
-//		});
-		query.getFirstInBackground(new GetCallback<ParseObject>() {
-			
-			@Override
-			public void done(ParseObject question, ParseException e) {
-				if (e != null) {
-					Toast.makeText(getApplicationContext(), "Error in something" + e.getMessage(), Toast.LENGTH_SHORT).show();
-				}
-				else if (question != null) {
-					String que = question.getString("question");
-					
-					Toast.makeText(getApplicationContext(), que, Toast.LENGTH_SHORT).show();
-				}
-				else {
-					Toast.makeText(getApplicationContext(), "NO QUESTION", Toast.LENGTH_SHORT).show();
-				}
-				
-			}
-		});
-		
-		
-		
+		try {
+			questions = getFullShow(query.count(), "easy");//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+			//Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+		}
+		//Toast.makeText(getApplicationContext(),  questions.get(0).getString("question"), Toast.LENGTH_SHORT).show();
+		populateQuestions(questions);
 	}
 	
 	
 	
 	
 	public void mediumStart() {
+		ArrayList<ParseObject> questions = null;
 		Log.d(TAG, "mediumStart()");
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Question");
 		query.whereEqualTo("difficulty", "medium");
 		try {
-			getFullShow(query.count(), "medium");//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			//Toast.makeText(getApplicationContext(), count + " questions total", Toast.LENGTH_LONG).show();
+			questions = getFullShow(query.count(), "medium");//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		} catch (ParseException e1) {
 			e1.printStackTrace();
-			Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
 		}
+		//Toast.makeText(getApplicationContext(),  questions.get(0).getString("question"), Toast.LENGTH_SHORT).show();
+		populateQuestions(questions);
 	}
 
 	public void hardStart() {
-		
+		ArrayList<ParseObject> questions = null;
+		Log.d(TAG, "hardStart()");
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("Question");
+		query.whereEqualTo("difficulty", "hard");
+		try {
+			questions = getFullShow(query.count(), "hard");//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+			//Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+		}
+		//Toast.makeText(getApplicationContext(),  questions.get(0).getString("question"), Toast.LENGTH_SHORT).show();
+		populateQuestions(questions);
 	}
 	
 	
@@ -141,7 +137,7 @@ public class GameSetupActivity extends Activity {
 			ParseQuery<ParseObject> query = ParseQuery.getQuery("Question");
 			query.whereEqualTo("difficulty", difficulty);
 			try {
-				Thread.sleep(200);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -155,9 +151,9 @@ public class GameSetupActivity extends Activity {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-			Toast.makeText(getApplicationContext(), questionCount + " questions", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(getApplicationContext(), questionCount + " questions", Toast.LENGTH_SHORT).show();
 		}
-		Toast.makeText(getApplicationContext(), questionCount + " questions Done", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getApplicationContext(), questionCount + " questions Done", Toast.LENGTH_SHORT).show();
 		
 		ArrayList<ParseObject> fullShowList = null;
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Question");
@@ -168,7 +164,7 @@ public class GameSetupActivity extends Activity {
 		
 		try {
 			fullShowList = (ArrayList<ParseObject>) query.find();//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			Toast.makeText(getApplicationContext(), fullShowList.size() + " questions total and done", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(getApplicationContext(), fullShowList.size() + " questions total and done", Toast.LENGTH_SHORT).show();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -185,6 +181,9 @@ public class GameSetupActivity extends Activity {
 		//get a random question out of the 
 	    int questionNumber = rand.nextInt(numQuestions);
 	    //get show number of that one.
+	    if (questionNumber > 1000) {
+	    	questionNumber %= 1000;
+	    }
 	    query.setSkip(questionNumber);
 	    //only get the one
 	    try {
@@ -195,6 +194,23 @@ public class GameSetupActivity extends Activity {
 			e.printStackTrace();
 			return null;
 		}	    
+	}
+	
+	public void populateQuestions(ArrayList<ParseObject> questions) {
+//		String output = "";
+		for (ParseObject po : questions) {
+			
+			gameQuestions.add(new Question(po.getString("question"),
+					po.getString("answer"),
+					po.getString("category"),
+					po.getString("round"),
+					po.getString("value"),
+					po.getString("difficulty")));
+		}
+		
+		Intent i = new Intent(getApplicationContext(), GameBoardActivity.class);
+		i.putExtra(GameBoardActivity.EXTRA_GAME_BOARD_QUESTIONS, new DataWrapper(gameQuestions));
+		startActivityForResult(i, 0);
 	}
 	
 }

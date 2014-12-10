@@ -1,6 +1,8 @@
 package itp341.groom.bobby.finalproject.app.model;
 
-public class Question {
+import java.io.Serializable;
+
+public class Question implements Serializable{
 	private String question;
 	private String answer;
 	private String category;

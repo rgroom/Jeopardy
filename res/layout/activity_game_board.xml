@@ -22,7 +22,7 @@
             android:gravity="center"
             android:lines="3"
             android:maxLines="100"
-            android:text="TextView fdas fdsa and then there was one"
+            android:text="TextView"
             android:textColor="#e9e306"
             android:textStyle="bold" />
 
@@ -96,7 +96,7 @@
         android:layout_weight="1"
         android:gravity="center">
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/buttonRow1Col1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_margin="4dp"
@@ -107,7 +107,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/buttonRow1Col2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_first_row"
@@ -118,7 +118,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/buttonRow1Col3"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_first_row"
@@ -129,7 +129,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/buttonRow1Col4"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_first_row"
@@ -140,7 +140,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/buttonRow1Col5"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_first_row"
@@ -151,7 +151,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/buttonRow1Col6"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_first_row"
@@ -166,7 +166,7 @@
         android:layout_weight="1"
         android:gravity="center">
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/buttonRow2Col1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_second_row"
@@ -177,7 +177,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button8"
+            android:id="@+id/buttonRow2Col2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_second_row"
@@ -188,7 +188,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button9"
+            android:id="@+id/buttonRow2Col3"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_second_row"
@@ -199,7 +199,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button10"
+            android:id="@+id/buttonRow2Col4"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_second_row"
@@ -210,7 +210,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button11"
+            android:id="@+id/buttonRow2Col5"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_second_row"
@@ -221,7 +221,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button12"
+            android:id="@+id/buttonRow2Col6"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_second_row"
@@ -236,7 +236,7 @@
         android:layout_weight="1"
         android:gravity="center">
         <Button
-            android:id="@+id/button13"
+            android:id="@+id/buttonRow3Col1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_third_row"
@@ -247,7 +247,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button14"
+            android:id="@+id/buttonRow3Col2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_third_row"
@@ -258,7 +258,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button15"
+            android:id="@+id/buttonRow3Col3"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_third_row"
@@ -269,7 +269,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button16"
+            android:id="@+id/buttonRow3Col4"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_third_row"
@@ -280,7 +280,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button17"
+            android:id="@+id/buttonRow3Col5"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_third_row"
@@ -291,7 +291,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button18"
+            android:id="@+id/buttonRow3Col6"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_third_row"
@@ -306,7 +306,7 @@
         android:layout_weight="1"
         android:gravity="center">
         <Button
-            android:id="@+id/button19"
+            android:id="@+id/buttonRow4Col1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_fourth_row"
@@ -317,7 +317,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button20"
+            android:id="@+id/buttonRow4Col2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_fourth_row"
@@ -328,7 +328,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button21"
+            android:id="@+id/buttonRow4Col3"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_fourth_row"
@@ -339,7 +339,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button22"
+            android:id="@+id/buttonRow4Col4"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_fourth_row"
@@ -350,7 +350,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button23"
+            android:id="@+id/buttonRow4Col5"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_fourth_row"
@@ -361,7 +361,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button24"
+            android:id="@+id/buttonRow4Col6"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_fourth_row"
@@ -376,7 +376,7 @@
         android:layout_weight="1"
         android:gravity="center">
         <Button
-            android:id="@+id/button25"
+            android:id="@+id/buttonRow5Col1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_fifth_row"
@@ -387,7 +387,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button26"
+            android:id="@+id/buttonRow5Col2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_fifth_row"
@@ -398,7 +398,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button27"
+            android:id="@+id/buttonRow5Col3"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_fifth_row"
@@ -409,7 +409,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button28"
+            android:id="@+id/buttonRow5Col4"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_fifth_row"
@@ -420,7 +420,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button29"
+            android:id="@+id/buttonRow5Col5"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_fifth_row"
@@ -431,7 +431,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button30"
+            android:id="@+id/buttonRow5Col6"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_fifth_row"

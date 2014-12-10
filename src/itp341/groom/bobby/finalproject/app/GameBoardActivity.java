@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class GameBoardActivity extends Activity implements View.OnClickListener{
@@ -47,6 +48,13 @@ public class GameBoardActivity extends Activity implements View.OnClickListener{
 	Button buttonRow5Col4;
 	Button buttonRow5Col5;
 	Button buttonRow5Col6;
+	
+	TextView textCol1;
+	TextView textCol2;
+	TextView textCol3;
+	TextView textCol4;
+	TextView textCol5;
+	TextView textCol6;
 	
 	
 	DataWrapper dw;
@@ -90,6 +98,13 @@ public class GameBoardActivity extends Activity implements View.OnClickListener{
 		buttonRow5Col5 = (Button) findViewById(R.id.buttonRow5Col5);
 		buttonRow5Col6 = (Button) findViewById(R.id.buttonRow5Col6);
 		
+		textCol1 = (TextView) findViewById(R.id.textCol1);
+		textCol2 = (TextView) findViewById(R.id.textCol2);
+		textCol3 = (TextView) findViewById(R.id.textCol3);
+		textCol4 = (TextView) findViewById(R.id.textCol4);
+		textCol5 = (TextView) findViewById(R.id.textCol5);
+		textCol6 = (TextView) findViewById(R.id.textCol6);
+		
 		buttonRow1Col1.setOnClickListener(this);
 		buttonRow1Col2.setOnClickListener(this);
 		buttonRow1Col3.setOnClickListener(this);
@@ -124,6 +139,13 @@ public class GameBoardActivity extends Activity implements View.OnClickListener{
 		
 		dw = (DataWrapper) getIntent().getSerializableExtra(EXTRA_GAME_BOARD_QUESTIONS);
 		questions = dw.getQuestions();
+		
+		textCol1.setText(questions.get(0).getCategory());
+		textCol2.setText(questions.get(1).getCategory());
+		textCol3.setText(questions.get(2).getCategory());
+		textCol4.setText(questions.get(3).getCategory());
+		textCol5.setText(questions.get(4).getCategory());
+		textCol6.setText(questions.get(5).getCategory());
 		/*DataWrapper dw = (DataWrapper) getIntent().getSerializableExtra("data");
 		ArrayList<Parliament> list = dw.getParliaments();*/
 	}

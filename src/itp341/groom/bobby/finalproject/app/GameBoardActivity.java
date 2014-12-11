@@ -155,18 +155,24 @@ public class GameBoardActivity extends Activity implements View.OnClickListener{
 	
 	@Override
 	public void onClick(View v) {
-		String bleh = v.getResources().getResourceName(v.getId());
+		String buttonId = v.getResources().getResourceName(v.getId());
+		String bleh = buttonId;
 		bleh = bleh.replace("itp341.groom.bobby.finalproject.app:id/buttonRow", "");
 		String[] rowCol = bleh.split("Col");
 		String blah = v.getResources().getResourceName(v.getId());
 		//Toast.makeText(getApplicationContext(), rowCol[0]+"x"+rowCol[1], Toast.LENGTH_SHORT).show();
 		
-		//(row-1)*6 + col
+		//disable the button.
+		Button tileClicked = (Button) findViewById(v.getId());
+		tileClicked.setEnabled(false);
+		tileClicked.setText("");
+		
 		int row = Integer.parseInt(rowCol[0]);
 		int col = Integer.parseInt(rowCol[1]);
 		int index = (row-1)*6 + col-1;
 		//questions.get(index).getQuestion() + "\n" + questions.get(index).getAnswer()
 		//Toast.makeText(getApplicationContext(), questions.get(index).getQuestion() + "\n" + questions.get(index).getAnswer(), Toast.LENGTH_LONG).show();
+		
 		
 		Intent i = new Intent(getApplicationContext(), QuestionActivity.class);
 		i.putExtra(QuestionActivity.EXTRA_QUESTION, questions.get(index));

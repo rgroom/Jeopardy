@@ -18,11 +18,14 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f060030;
+        public static final int FrameLayout1=0x7f060030;
+        public static final int LinearLayout1=0x7f060036;
         public static final int TableLayout1=0x7f060000;
         public static final int buttonEasy=0x7f060027;
         public static final int buttonHard=0x7f06002d;
+        public static final int buttonLeftAnswer=0x7f060034;
         public static final int buttonMedium=0x7f06002a;
+        public static final int buttonRightAnswer=0x7f060035;
         public static final int buttonRow1Col1=0x7f060007;
         public static final int buttonRow1Col2=0x7f060008;
         public static final int buttonRow1Col3=0x7f060009;
@@ -53,7 +56,7 @@ public final class R {
         public static final int buttonRow5Col4=0x7f060022;
         public static final int buttonRow5Col5=0x7f060023;
         public static final int buttonRow5Col6=0x7f060024;
-        public static final int buttonStartScreen=0x7f060034;
+        public static final int buttonStartScreen=0x7f060037;
         public static final int buttonSubmitAnswer=0x7f060033;
         public static final int editAnswer=0x7f060032;
         public static final int textCol1=0x7f060001;

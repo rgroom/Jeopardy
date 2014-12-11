@@ -31,6 +31,8 @@ public class GameSetupActivity extends Activity {
 	Button mediumButton;
 	Button hardButton;
 	
+	int numPlayers;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		Log.d(TAG, "GameSetupActivity onCreate()");

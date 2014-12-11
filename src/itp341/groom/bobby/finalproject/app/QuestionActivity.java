@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class QuestionActivity extends Activity {
 
@@ -25,6 +26,8 @@ public class QuestionActivity extends Activity {
 	Question currentQuestion;
 	
 	int playersTurn;
+	boolean firstPlayerGuessed;
+	boolean secondPlayerGuessed;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,10 @@ public class QuestionActivity extends Activity {
 		editAnswer.setVisibility(View.GONE);
 		buttonSubmitAnswer.setVisibility(View.GONE);
 		
+		
+		firstPlayerGuessed = false;
+		secondPlayerGuessed = false;
+		
 		buttonSubmitAnswer.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -59,6 +66,7 @@ public class QuestionActivity extends Activity {
 			public void onClick(View v) {
 				Log.d(TAG, "buttonLeftAnswer onClick()");
 				playersTurn=1;
+				firstPlayerGuessed = true;
 				answerQuestion(1);//1st player answered
 			}
 		});
@@ -68,6 +76,7 @@ public class QuestionActivity extends Activity {
 			public void onClick(View v) {
 				Log.d(TAG, "buttonRightAnswer onClick()");
 				playersTurn=2;
+				secondPlayerGuessed = true;
 				answerQuestion(2);//2nd player answered
 			}
 		});
@@ -78,14 +87,18 @@ public class QuestionActivity extends Activity {
 	
 	public void checkAnswer(String guess) {
 		String answer = currentQuestion.getAnswer();
+		Toast.makeText(getApplicationContext(), answer, Toast.LENGTH_LONG).show();
 		if (answer.toLowerCase().contains(guess.toLowerCase())) {
 			//to help with cheating, make sure that they a least kind of answer the thing correctly
 			if (Math.abs(answer.length() - guess.length())<Math.floor(answer.length()/2)) {
-				textQuestion.setText("Player " + 1 + " ::guess::" + guess + ":Answer Correct: " + answer + "\n\n" + displayQuestion + "\n" + currentQuestion.getValue());
+				textQuestion.setText("Player " + playersTurn + " ::guess::" + guess + ":Answer Correct: " + answer + "\n\n" + displayQuestion + "\n" + currentQuestion.getValue());
 			}
 			else {
 				textQuestion.setText("Player " + playersTurn + ": Incorrect Guess: " + guess + "\n\n" + displayQuestion + "\n" + currentQuestion.getValue());
 			}
+		}
+		else {
+			textQuestion.setText("Player " + playersTurn + ": Incorrect Guess: " + guess + "\n\n" + displayQuestion + "\n" + currentQuestion.getValue());
 		}
 	}
 	

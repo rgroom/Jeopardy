@@ -19,6 +19,9 @@ public class GameBoardActivity extends Activity implements View.OnClickListener{
 	public final static String TAG = GameBoardActivity.class.getSimpleName();
 	//public static final String EXTRA_PIZZA_ORDER = "itp341.groom.bobby.a4.app.pizzaOrder";
 	public static final String EXTRA_GAME_BOARD_QUESTIONS = "itp341.groom.bobby.finalproject.app.question";
+	public static final String EXTRA_NUM_PLAYERS = "itp341.groom.bobby.finalproject.app.numplayers";
+	public static final String EXTRA_FIRST_PLAYER_RESULT = "itp341.groom.bobby.finalproject.app.result.first.player";
+	public static final String EXTRA_SECOND_PLAYER_RESULT = "itp341.groom.bobby.finalproject.app.result.second.player";
 	
 	Button buttonRow1Col1;
 	Button buttonRow1Col2;
@@ -61,6 +64,10 @@ public class GameBoardActivity extends Activity implements View.OnClickListener{
 	
 	DataWrapper dw;
 	ArrayList<Question> questions;
+	int numPlayers;
+	
+	int firstPlayerScore;
+	int secondPlayerScore;
 	
 	
 	@Override
@@ -141,6 +148,7 @@ public class GameBoardActivity extends Activity implements View.OnClickListener{
 		
 		dw = (DataWrapper) getIntent().getSerializableExtra(EXTRA_GAME_BOARD_QUESTIONS);
 		questions = dw.getQuestions();
+		numPlayers = (int) getIntent().getIntExtra(EXTRA_NUM_PLAYERS, 1);
 		
 		textCol1.setText(questions.get(0).getCategory());
 		textCol2.setText(questions.get(1).getCategory());
@@ -150,11 +158,15 @@ public class GameBoardActivity extends Activity implements View.OnClickListener{
 		textCol6.setText(questions.get(5).getCategory());
 		/*DataWrapper dw = (DataWrapper) getIntent().getSerializableExtra("data");
 		ArrayList<Parliament> list = dw.getParliaments();*/
+		
+		firstPlayerScore = 0;
+		secondPlayerScore = 0;
 	}
 	
 	
 	@Override
 	public void onClick(View v) {
+		Log.d(TAG, "onClick()");
 		String buttonId = v.getResources().getResourceName(v.getId());
 		String bleh = buttonId;
 		bleh = bleh.replace("itp341.groom.bobby.finalproject.app:id/buttonRow", "");
@@ -170,21 +182,32 @@ public class GameBoardActivity extends Activity implements View.OnClickListener{
 		int row = Integer.parseInt(rowCol[0]);
 		int col = Integer.parseInt(rowCol[1]);
 		int index = (row-1)*6 + col-1;
-		//questions.get(index).getQuestion() + "\n" + questions.get(index).getAnswer()
 		//Toast.makeText(getApplicationContext(), questions.get(index).getQuestion() + "\n" + questions.get(index).getAnswer(), Toast.LENGTH_LONG).show();
 		
 		
 		Intent i = new Intent(getApplicationContext(), QuestionActivity.class);
 		i.putExtra(QuestionActivity.EXTRA_QUESTION, questions.get(index));
+		i.putExtra(QuestionActivity.EXTRA_NUM_PLAYERS, numPlayers);
 		startActivityForResult(i, 0);
-//		switch (v.getId()) {
-//		case R.id.buttonRow1Col1:
-////			String bleh = v.getResources().getResourceName(v.getId());
-////			Toast.makeText(getApplicationContext(), bleh, Toast.LENGTH_SHORT).show();
-//			break;
-//
-//		default:
-//			break;
-//		}
 	}
+
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		Log.d(TAG, "onActivityResult()");
+		
+		
+		if (data!=null) {
+			firstPlayerScore += data.getIntExtra(EXTRA_FIRST_PLAYER_RESULT, 0);
+			secondPlayerScore += data.getIntExtra(EXTRA_SECOND_PLAYER_RESULT, 0);
+		}
+		Toast.makeText(getApplicationContext(), data.getIntExtra(EXTRA_FIRST_PLAYER_RESULT, 0) + "\n" + data.getIntExtra(EXTRA_SECOND_PLAYER_RESULT, 0), Toast.LENGTH_LONG).show();
+		
+		
+		
+		
+	}
+	
+	
 }

@@ -212,6 +212,7 @@ public class GameSetupActivity extends Activity {
 		
 		Intent i = new Intent(getApplicationContext(), GameBoardActivity.class);
 		i.putExtra(GameBoardActivity.EXTRA_GAME_BOARD_QUESTIONS, new DataWrapper(gameQuestions));
+		i.putExtra(GameBoardActivity.EXTRA_NUM_PLAYERS, numPlayers);
 		startActivityForResult(i, 0);
 	}
 	

@@ -168,7 +168,7 @@ public class LogInActivity extends Activity {
 						c.getInt(TABLE_PLAYERS.COLUMN_HIGH_SCORE)
 						);
 			}
-			Toast.makeText(getApplicationContext(), "Got the Name " + p1.getName(), Toast.LENGTH_SHORT).show();
+			//Toast.makeText(getApplicationContext(), "Got the Name " + p1.getName(), Toast.LENGTH_SHORT).show();
 		}
 	}
 	
@@ -184,7 +184,7 @@ public class LogInActivity extends Activity {
 						c.getInt(TABLE_PLAYERS.COLUMN_HIGH_SCORE)
 						);
 			}
-			Toast.makeText(getApplicationContext(), "Got the Name " + p2.getName(), Toast.LENGTH_SHORT).show();
+			//Toast.makeText(getApplicationContext(), "Got the Name " + p2.getName(), Toast.LENGTH_SHORT).show();
 		}
 	}
 

@@ -175,7 +175,7 @@ public class QuestionActivity extends Activity {
 		String regEx1 = "([a-zA-Z]+)\\\\'([a-zA-Z])";//take care of the apostrophes
 		answer = answer.replaceAll(regEx1, "$1'$2");
 
-		Toast.makeText(getApplicationContext(), answer, Toast.LENGTH_LONG).show();
+		//Toast.makeText(getApplicationContext(), answer, Toast.LENGTH_LONG).show();
 		if (answer.toLowerCase().contains(guess.toLowerCase())) {
 			//to help with cheating, make sure that they a least kind of answer the thing correctly
 			if (Math.abs(answer.length() - guess.length())<Math.floor(answer.length()/2)) {

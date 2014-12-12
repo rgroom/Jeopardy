@@ -4,17 +4,37 @@ import java.io.Serializable;
 
 public class Player implements Serializable{
 	
+	private long _id;
 	private String name;
 	private int currentScore;
 	private int highScore;
-	private String highScoreGameBoard;
 	
+	public Player() {
+		super();
+	}
+	
+	public Player(long _id, String name, int currentScore, int highScore) {
+		super();
+		this._id = _id;
+		this.name = name;
+		this.currentScore = currentScore;
+		this.highScore = highScore;
+	}
+
 	public Player(String name) {
 		this.name = name;
+		currentScore = 0;
+		highScore = 0;
 	}
 
 	
 	//Getters and Setters.
+	public void set_id(long _id) {
+		this._id = _id;
+	}
+	public long get_id() {
+		return _id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -38,15 +58,9 @@ public class Player implements Serializable{
 	public void setHighScore(int highScore) {
 		this.highScore = highScore;
 	}
-
-	public String getHighScoreGameBoard() {
-		return highScoreGameBoard;
-	}
-
-	public void setHighScoreGameBoard(String highScoreGameBoard) {
-		this.highScoreGameBoard = highScoreGameBoard;
-	}
 	
-	
+	public String toString() {
+		return this.name;
+	}
 
 }

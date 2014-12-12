@@ -47,7 +47,7 @@ public class StartScreenActivity extends Activity {
 	
 	private void startGame() {
 		Log.d(TAG, "startGame()");
-		Intent i = new Intent(getApplicationContext(), GameSetupActivity.class);
+		Intent i = new Intent(getApplicationContext(), LogInActivity.class);
 		startActivityForResult(i, 0);
 	}
 }

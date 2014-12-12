@@ -22,7 +22,7 @@ public class GameBoardActivity extends Activity implements View.OnClickListener{
 	public static final String EXTRA_NUM_PLAYERS = "itp341.groom.bobby.finalproject.app.numplayers";
 	public static final String EXTRA_FIRST_PLAYER_RESULT = "itp341.groom.bobby.finalproject.app.result.first.player";
 	public static final String EXTRA_SECOND_PLAYER_RESULT = "itp341.groom.bobby.finalproject.app.result.second.player";
-	
+
 	Button buttonRow1Col1;
 	Button buttonRow1Col2;
 	Button buttonRow1Col3;
@@ -53,29 +53,35 @@ public class GameBoardActivity extends Activity implements View.OnClickListener{
 	Button buttonRow5Col4;
 	Button buttonRow5Col5;
 	Button buttonRow5Col6;
-	
+
 	TextView textCol1;
 	TextView textCol2;
 	TextView textCol3;
 	TextView textCol4;
 	TextView textCol5;
 	TextView textCol6;
-	
-	
+
+	TextView textPlayer1;
+	TextView textPlayer1Score;
+	TextView textWhosTurn;
+	TextView textPlayer2;
+	TextView textPlayer2Score;
+
+
 	DataWrapper dw;
 	ArrayList<Question> questions;
 	int numPlayers;
-	
+
 	int firstPlayerScore;
 	int secondPlayerScore;
-	
-	
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		Log.d(TAG, "GameBoardActivity onCreate()");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game_board);
-		
+
 		buttonRow1Col1 = (Button) findViewById(R.id.buttonRow1Col1);
 		buttonRow1Col2 = (Button) findViewById(R.id.buttonRow1Col2);
 		buttonRow1Col3 = (Button) findViewById(R.id.buttonRow1Col3);
@@ -106,14 +112,20 @@ public class GameBoardActivity extends Activity implements View.OnClickListener{
 		buttonRow5Col4 = (Button) findViewById(R.id.buttonRow5Col4);
 		buttonRow5Col5 = (Button) findViewById(R.id.buttonRow5Col5);
 		buttonRow5Col6 = (Button) findViewById(R.id.buttonRow5Col6);
-		
+
 		textCol1 = (TextView) findViewById(R.id.textCol1);
 		textCol2 = (TextView) findViewById(R.id.textCol2);
 		textCol3 = (TextView) findViewById(R.id.textCol3);
 		textCol4 = (TextView) findViewById(R.id.textCol4);
 		textCol5 = (TextView) findViewById(R.id.textCol5);
 		textCol6 = (TextView) findViewById(R.id.textCol6);
-		
+
+		textPlayer1 = (TextView) findViewById(R.id.textPlayer1);
+		textPlayer1Score = (TextView) findViewById(R.id.textPlayer1Score);
+		textWhosTurn = (TextView) findViewById(R.id.textWhosTurn);
+		textPlayer2 = (TextView) findViewById(R.id.textPlayer2);
+		textPlayer2Score = (TextView) findViewById(R.id.textPlayer2Score);
+
 		buttonRow1Col1.setOnClickListener(this);
 		buttonRow1Col2.setOnClickListener(this);
 		buttonRow1Col3.setOnClickListener(this);
@@ -144,12 +156,16 @@ public class GameBoardActivity extends Activity implements View.OnClickListener{
 		buttonRow5Col4.setOnClickListener(this);
 		buttonRow5Col5.setOnClickListener(this);
 		buttonRow5Col6.setOnClickListener(this);
-		
-		
+
+
 		dw = (DataWrapper) getIntent().getSerializableExtra(EXTRA_GAME_BOARD_QUESTIONS);
 		questions = dw.getQuestions();
 		numPlayers = (int) getIntent().getIntExtra(EXTRA_NUM_PLAYERS, 1);
-		
+		if (numPlayers == 1) {
+			textPlayer2.setVisibility(View.INVISIBLE);
+			textPlayer2Score.setVisibility(View.INVISIBLE);
+		}
+
 		textCol1.setText(questions.get(0).getCategory());
 		textCol2.setText(questions.get(1).getCategory());
 		textCol3.setText(questions.get(2).getCategory());
@@ -158,12 +174,12 @@ public class GameBoardActivity extends Activity implements View.OnClickListener{
 		textCol6.setText(questions.get(5).getCategory());
 		/*DataWrapper dw = (DataWrapper) getIntent().getSerializableExtra("data");
 		ArrayList<Parliament> list = dw.getParliaments();*/
-		
+
 		firstPlayerScore = 0;
 		secondPlayerScore = 0;
 	}
-	
-	
+
+
 	@Override
 	public void onClick(View v) {
 		Log.d(TAG, "onClick()");
@@ -173,18 +189,18 @@ public class GameBoardActivity extends Activity implements View.OnClickListener{
 		String[] rowCol = bleh.split("Col");
 		String blah = v.getResources().getResourceName(v.getId());
 		//Toast.makeText(getApplicationContext(), rowCol[0]+"x"+rowCol[1], Toast.LENGTH_SHORT).show();
-		
+
 		//disable the button.
 		Button tileClicked = (Button) findViewById(v.getId());
 		tileClicked.setEnabled(false);
 		tileClicked.setText("");
-		
+
 		int row = Integer.parseInt(rowCol[0]);
 		int col = Integer.parseInt(rowCol[1]);
 		int index = (row-1)*6 + col-1;
 		//Toast.makeText(getApplicationContext(), questions.get(index).getQuestion() + "\n" + questions.get(index).getAnswer(), Toast.LENGTH_LONG).show();
-		
-		
+
+
 		Intent i = new Intent(getApplicationContext(), QuestionActivity.class);
 		i.putExtra(QuestionActivity.EXTRA_QUESTION, questions.get(index));
 		i.putExtra(QuestionActivity.EXTRA_NUM_PLAYERS, numPlayers);
@@ -196,18 +212,19 @@ public class GameBoardActivity extends Activity implements View.OnClickListener{
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		Log.d(TAG, "onActivityResult()");
-		
-		
+
+
 		if (data!=null) {
 			firstPlayerScore += data.getIntExtra(EXTRA_FIRST_PLAYER_RESULT, 0);
 			secondPlayerScore += data.getIntExtra(EXTRA_SECOND_PLAYER_RESULT, 0);
 		}
-		Toast.makeText(getApplicationContext(), data.getIntExtra(EXTRA_FIRST_PLAYER_RESULT, 0) + "\n" + data.getIntExtra(EXTRA_SECOND_PLAYER_RESULT, 0), Toast.LENGTH_LONG).show();
-		
-		
-		
-		
+		//Toast.makeText(getApplicationContext(), data.getIntExtra(EXTRA_FIRST_PLAYER_RESULT, 0) + "\n" + data.getIntExtra(EXTRA_SECOND_PLAYER_RESULT, 0), Toast.LENGTH_LONG).show();
+
+		textPlayer1Score.setText(" $" + firstPlayerScore);
+		textPlayer2Score.setText(" $" + secondPlayerScore);
+
+
 	}
-	
-	
+
+
 }

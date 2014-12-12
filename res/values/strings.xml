@@ -16,5 +16,12 @@
     <string name="button_fourth_row">$800</string>
     <string name="button_fifth_row">$1000</string>
     <string name="title_activity_question">QuestionActivity</string>
+    <string name="title_activity_log_in">LogInActivity</string>
+    <string name="button_new_profile">New Profile</string>
+    <string name="label_select_num_players">Please select the number of players.</string>
+    <string name="button_guest">Guest</string>
+    <string name="button_login">Login</string>
+    <string name="button_start">Start!</string>
+    <string name="title_activity_add_player">AddPlayer</string>
 
 </resources>

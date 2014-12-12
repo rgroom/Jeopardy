@@ -40,6 +40,16 @@
             android:label="@string/title_activity_question"
             android:screenOrientation="landscape" >
         </activity>
+        <activity
+            android:name=".LogInActivity"
+            android:label="@string/title_activity_log_in"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".AddPlayer"
+            android:label="@string/title_activity_add_player"
+            android:screenOrientation="landscape" >
+        </activity>
     </application>
 
 </manifest>

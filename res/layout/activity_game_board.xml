@@ -5,7 +5,57 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:weightSum="6"
+    android:background="#000"
     tools:context="${relativePackage}.${activityClass}" >
+    <TableRow
+        android:weightSum="6"
+        android:layout_marginTop="4dp" >
+        <TextView
+            android:id="@+id/textPlayer1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Player 1: "
+            android:textColor="#FFF"
+            android:gravity="right"/>
+            
+        <TextView
+            android:id="@+id/textPlayer1Score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="$1000"
+            android:textColor="#FFF"
+            android:gravity="left"/>
+        
+        <TextView
+            android:id="@+id/textWhosTurn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Player 1, chose a category"
+            android:textColor="#FFF"
+            android:gravity="center"/>
+            
+        <TextView
+            android:id="@+id/textPlayer2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Player 2: "
+            android:textColor="#FFF"
+            android:gravity="right"/>
+            
+        <TextView
+            android:id="@+id/textPlayer2Score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="$1000"
+            android:textColor="#FFF"
+            android:gravity="left"/>
+        
+    </TableRow>
     
     <TableRow
         android:layout_weight="1"

@@ -25,6 +25,10 @@ public class GameSetupActivity extends Activity {
 
 	private final static String TAG = GameSetupActivity.class.getSimpleName();
 	
+	public final static String EXTRA_PLAYER_ONE_INFO = "itp341.groom.bobby.finalproject.app.result.player.one";
+	public final static String EXTRA_PLAYER_TWO_INFO = "itp341.groom.bobby.finalproject.app.result.player.two";
+	public final static String EXTRA_NUM_PLAYERS = "itp341.groom.bobby.finalproject.app.result.num.players";
+	
 	ArrayList<Question> gameQuestions;
 	
 	Button easyButton;

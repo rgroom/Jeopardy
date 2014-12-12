@@ -31,54 +31,54 @@ public class QuestionActivity extends Activity {
 	EditText editAnswer;
 	String submittedAnswer;
 	String displayQuestion;
-	
+
 	MediaPlayer player;
-	
+
 	Timer t;
 	int numPlayers;
-	
+
 	Question currentQuestion;
-	
+
 	int playersTurn;
 	boolean firstPlayerGuessed;
 	boolean secondPlayerGuessed;
 	int firstPlayerResult;
 	int secondPlayerResult;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_question);
 		Log.d(TAG, "onCreate()");
-		
+
 		//Initializing all of the variables
 		playersTurn = 1;
 		firstPlayerResult = 0;
 		secondPlayerResult = 0;
 		firstPlayerGuessed = false;
 		secondPlayerGuessed = false;
-		
+
 		numPlayers = (int) getIntent().getIntExtra(EXTRA_NUM_PLAYERS, 1);
-		
+
 		t = new Timer();
 		textQuestion = (TextView) findViewById(R.id.textQuestion);
 		buttonSubmitAnswer = (Button) findViewById(R.id.buttonSubmitAnswer);
 		buttonLeftAnswer = (Button) findViewById(R.id.buttonLeftAnswer);
 		buttonRightAnswer = (Button) findViewById(R.id.buttonRightAnswer);
 		editAnswer = (EditText) findViewById(R.id.editAnswer);
-		
+
 		//setting the visibility so some of the things are gone.
 		editAnswer.setVisibility(View.GONE);
 		buttonSubmitAnswer.setVisibility(View.GONE);
 		buttonLeftAnswer.setVisibility(View.VISIBLE);
 		buttonRightAnswer.setVisibility(View.VISIBLE);
-		
+
 		//get and display the actual Question.
 		currentQuestion = (Question) getIntent().getSerializableExtra(EXTRA_QUESTION);
 		displayQuestion();
-		
+
 		player = new MediaPlayer();
-		
+
 		//Set up the automatic return for no guesses
 		t.schedule(new TimerTask() {
 			@Override
@@ -92,10 +92,10 @@ public class QuestionActivity extends Activity {
 			}
 		}, 10000);
 
-		
+
 		//OnClickListeners for all of the buttons
 		buttonSubmitAnswer.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				Log.d(TAG, "buttonSubmitAnswer onClick()");
@@ -103,7 +103,7 @@ public class QuestionActivity extends Activity {
 				checkAnswer(submittedAnswer);
 			}
 		});
-		
+
 		buttonLeftAnswer.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -111,6 +111,15 @@ public class QuestionActivity extends Activity {
 				t.cancel();
 				t = new Timer();
 				t.purge();
+				try {
+					AssetFileDescriptor afd = getAssets().openFd("jringin.mp3");
+					player.reset();
+					player.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+					player.prepare();
+					player.start();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				playersTurn=1;
 				firstPlayerGuessed = true;
 				//Taking care of if there is only one person playing.
@@ -122,7 +131,7 @@ public class QuestionActivity extends Activity {
 				answerQuestion();//1st player answered
 			}
 		});
-		
+
 		buttonRightAnswer.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -130,6 +139,15 @@ public class QuestionActivity extends Activity {
 				t.cancel();
 				t = new Timer();
 				t.purge();
+				try {
+					AssetFileDescriptor afd = getAssets().openFd("jringin.mp3");
+					player.reset();
+					player.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+					player.prepare();
+					player.start();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				playersTurn=2;
 				//Taking care of if there is only one person playing.
 				if (numPlayers == 1) {
@@ -142,9 +160,9 @@ public class QuestionActivity extends Activity {
 			}
 		});
 	}
-	
-	
-	
+
+
+
 	//Takes as input a String that is the guess of the current player
 	//If the correct answer is close to the guess, they are correct
 	//A new timer is set, that once expres, returns to the previous screen.
@@ -155,7 +173,7 @@ public class QuestionActivity extends Activity {
 		String answer = currentQuestion.getAnswer();
 		String regEx1 = "([a-zA-Z]+)\\\\'([a-zA-Z])";//take care of the apostrophes
 		answer = answer.replaceAll(regEx1, "$1'$2");
-		
+
 		Toast.makeText(getApplicationContext(), answer, Toast.LENGTH_LONG).show();
 		if (answer.toLowerCase().contains(guess.toLowerCase())) {
 			//to help with cheating, make sure that they a least kind of answer the thing correctly
@@ -165,6 +183,13 @@ public class QuestionActivity extends Activity {
 				//hide all input methods from the player
 				editAnswer.setVisibility(View.GONE);
 				buttonSubmitAnswer.setVisibility(View.GONE);
+				t.schedule(new TimerTask() {
+					@Override
+					public void run() {
+						returnToGameBoard();
+					}
+				}, 3000);//return to the main screen after 3 seconds.
+				return;
 			}
 			else {
 				textQuestion.setText("Player " + playersTurn + ": Incorrect Guess: " + guess + "\n\n" + displayQuestion + "\n" + currentQuestion.getValue());
@@ -177,16 +202,25 @@ public class QuestionActivity extends Activity {
 			calculateReturn(false);
 			resetButtons();
 		}
-		
-		t.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				returnToGameBoard();
-			}
-		}, 3000);//return to the main screen after 3 seconds.
-		
+		if (firstPlayerGuessed && secondPlayerGuessed) {
+			noAnswer();
+		}
+		else {
+			t.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							noAnswer();
+						}
+					});
+				}
+			}, 5000);//return to the main screen after 3 seconds.
+		}
+
 	}
-	
+
 	//Called when someone clicks on the screen
 	//Enables view of the editText portion and submit button for users to answer the question.
 	public void answerQuestion() {
@@ -194,15 +228,15 @@ public class QuestionActivity extends Activity {
 		//Remove the two large overlaying buttons
 		buttonLeftAnswer.setVisibility(View.INVISIBLE);
 		buttonRightAnswer.setVisibility(View.INVISIBLE);
-		
+
 		//set the input area visible and accept button as well
 		editAnswer.setVisibility(View.VISIBLE);
 		buttonSubmitAnswer.setVisibility(View.VISIBLE);
-		
+
 		//Show which player is responsible for answering the questions.
 		textQuestion.setText("Player " + playersTurn + ":\n\n" + displayQuestion + "\n" + currentQuestion.getValue());
 	}
-	
+
 	//Parses the question to get rid of unwanted characters
 	//Display the question on the screen
 	public void displayQuestion() {
@@ -216,7 +250,7 @@ public class QuestionActivity extends Activity {
 		displayQuestion = displayQuestion.replaceAll(regEx2, "");
 		displayQuestion = displayQuestion.replaceAll(regEx3, "\n");
 		displayQuestion = displayQuestion.replaceAll(regEx4, "$1'$2");
-		
+
 		displayQuestion = displayQuestion.substring(1, displayQuestion.length()-1);//get rid of the quotes at the beginning and end of each Question.
 		textQuestion.setText(displayQuestion + "\n" + currentQuestion.getValue());
 	}
@@ -228,7 +262,7 @@ public class QuestionActivity extends Activity {
 		int questionAmount = Integer.parseInt(currentQuestion.getValue().substring(1, currentQuestion.getValue().length()));
 		//if they answered incorrectly, then subtract the value
 		questionAmount = answeredCorrectly ? questionAmount : questionAmount*-1;
-		
+
 		switch (playersTurn) {
 		case 1:
 			firstPlayerResult += questionAmount;
@@ -238,7 +272,7 @@ public class QuestionActivity extends Activity {
 			break;
 		}
 	}
-	
+
 	public void resetButtons() {
 		Log.d(TAG, "resetButtons()");
 		editAnswer.setVisibility(View.GONE);
@@ -253,13 +287,14 @@ public class QuestionActivity extends Activity {
 			buttonLeftAnswer.setVisibility(View.INVISIBLE);
 			buttonRightAnswer.setVisibility(View.VISIBLE);
 		}
-		
+
 	}
-	
+
 	public void noAnswer() {
 		Log.d(TAG, "noAnswer()");
 		try {
 			AssetFileDescriptor afd = getAssets().openFd("jtimeUp.mp3");
+			player.reset();
 			player.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
 			player.prepare();
 			player.start();
@@ -280,7 +315,7 @@ public class QuestionActivity extends Activity {
 			}
 		}, 3000);
 	}
-	
+
 	public void returnToGameBoard() {
 		Intent returnResult = new Intent();
 		returnResult.putExtra(GameBoardActivity.EXTRA_FIRST_PLAYER_RESULT, firstPlayerResult);
@@ -288,13 +323,13 @@ public class QuestionActivity extends Activity {
 		setResult(RESULT_OK, returnResult);
 		finish();
 	}
-	
-	
+
+
 	@Override
 	public void onBackPressed() {
 		//super.onBackPressed();
 		return;
 	}
-	
-	
+
+
 }

@@ -31,7 +31,8 @@
             android:layout_weight="8"
             android:ems="10"
             android:imeOptions="actionDone"
-            android:inputType="textAutoCorrect" />
+            android:inputType="textAutoCorrect"
+            android:hint="@string/label_hint_textbox" />
 
         <Button
             android:id="@+id/buttonSubmitAnswer"
@@ -39,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Button" />
+            android:text="@string/button_accept_user_name" />
     </LinearLayout>
 
     <LinearLayout

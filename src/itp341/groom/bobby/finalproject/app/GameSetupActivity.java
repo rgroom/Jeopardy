@@ -28,6 +28,8 @@ public class GameSetupActivity extends Activity {
 	public final static String EXTRA_PLAYER_ONE_INFO = "itp341.groom.bobby.finalproject.app.result.player.one";
 	public final static String EXTRA_PLAYER_TWO_INFO = "itp341.groom.bobby.finalproject.app.result.player.two";
 	public final static String EXTRA_NUM_PLAYERS = "itp341.groom.bobby.finalproject.app.result.num.players";
+	public final static String EXTRA_FIRST_PLAYER_RESULT = "itp341.groom.bobby.finalproject.app.result.first.player.result";
+	public final static String EXTRA_SECOND_PLAYER_RESULT = "itp341.groom.bobby.finalproject.app.result.second.player.result";
 	
 	ArrayList<Question> gameQuestions;
 	
@@ -36,6 +38,8 @@ public class GameSetupActivity extends Activity {
 	Button hardButton;
 	
 	int numPlayers;
+	String player1name;
+	String player2name;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,9 @@ public class GameSetupActivity extends Activity {
 		mediumButton = (Button) findViewById(R.id.buttonMedium);
 		hardButton = (Button) findViewById(R.id.buttonHard);
 		
+		numPlayers = getIntent().getIntExtra(EXTRA_NUM_PLAYERS, 0);
+		player1name = getIntent().getStringExtra(EXTRA_PLAYER_ONE_INFO);
+		player2name = getIntent().getStringExtra(EXTRA_PLAYER_TWO_INFO);
 		
 		//listeners
 		easyButton.setOnClickListener(new OnClickListener() {
@@ -217,8 +224,25 @@ public class GameSetupActivity extends Activity {
 		Intent i = new Intent(getApplicationContext(), GameBoardActivity.class);
 		i.putExtra(GameBoardActivity.EXTRA_GAME_BOARD_QUESTIONS, new DataWrapper(gameQuestions));
 		i.putExtra(GameBoardActivity.EXTRA_NUM_PLAYERS, numPlayers);
+		i.putExtra(GameBoardActivity.EXTRA_PLAYER_ONE_NAME, player1name);
+		i.putExtra(GameBoardActivity.EXTRA_PLAYER_TWO_NAME, player2name);
 		startActivityForResult(i, 0);
 	}
+
+
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		Log.d(TAG, "onActivityResult()");
+		int firstPlayerScore = data.getIntExtra(EXTRA_FIRST_PLAYER_RESULT, 0);
+		int secondPlayerScore = data.getIntExtra(EXTRA_SECOND_PLAYER_RESULT, 0);
+		Intent result = new Intent();
+		result.putExtra(LogInActivity.EXTRA_FIRST_PLAYER_RESULT, firstPlayerScore);
+		result.putExtra(LogInActivity.EXTRA_SECOND_PLAYER_RESULT, secondPlayerScore);
+	}
+	
+	
 	
 }
 

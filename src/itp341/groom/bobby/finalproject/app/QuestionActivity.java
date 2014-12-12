@@ -100,6 +100,7 @@ public class QuestionActivity extends Activity {
 			public void onClick(View v) {
 				Log.d(TAG, "buttonSubmitAnswer onClick()");
 				submittedAnswer = editAnswer.getText().toString();
+				editAnswer.setText("");
 				checkAnswer(submittedAnswer);
 			}
 		});
@@ -308,6 +309,8 @@ public class QuestionActivity extends Activity {
 		String regEx1 = "([a-zA-Z]+)\\\\'([a-zA-Z])";//take care of the apostrophes
 		answer = answer.replaceAll(regEx1, "$1'$2");
 		textQuestion.setText("Correct Answer: " + answer + "\n" + currentQuestion.getValue());
+		buttonLeftAnswer.setVisibility(View.INVISIBLE);
+		buttonRightAnswer.setVisibility(View.INVISIBLE);
 		t.schedule(new TimerTask() {
 			@Override
 			public void run() {

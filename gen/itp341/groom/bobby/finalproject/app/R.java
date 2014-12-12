@@ -27,7 +27,7 @@ public final class R {
         public static final int buttonHard=0x7f060036;
         public static final int buttonLeftAnswer=0x7f060047;
         public static final int buttonMedium=0x7f060033;
-        public static final int buttonNewProfile=0x7f06003d;
+        public static final int buttonNewProfile=0x7f06003e;
         public static final int buttonPlayer1Guest=0x7f06003f;
         public static final int buttonPlayer2Guest=0x7f060040;
         public static final int buttonRightAnswer=0x7f060048;
@@ -61,7 +61,7 @@ public final class R {
         public static final int buttonRow5Col4=0x7f06002b;
         public static final int buttonRow5Col5=0x7f06002c;
         public static final int buttonRow5Col6=0x7f06002d;
-        public static final int buttonStartGame=0x7f060041;
+        public static final int buttonStartGame=0x7f06003d;
         public static final int buttonStartScreen=0x7f060049;
         public static final int buttonSubmitAnswer=0x7f060046;
         public static final int editAnswer=0x7f060045;
@@ -77,7 +77,7 @@ public final class R {
         public static final int textCol4=0x7f06000d;
         public static final int textCol5=0x7f06000e;
         public static final int textCol6=0x7f06000f;
-        public static final int textFiller1=0x7f06003e;
+        public static final int textFiller1=0x7f060041;
         public static final int textNewUser=0x7f060001;
         public static final int textPlayer1=0x7f060005;
         public static final int textPlayer1Score=0x7f060006;
@@ -104,6 +104,7 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f040000;
+        public static final int button_accept_user_name=0x7f040017;
         public static final int button_easy=0x7f040005;
         public static final int button_fifth_row=0x7f04000d;
         public static final int button_first_row=0x7f040009;
@@ -117,6 +118,7 @@ public final class R {
         public static final int button_start=0x7f040014;
         public static final int button_third_row=0x7f04000b;
         public static final int hello_world=0x7f040001;
+        public static final int label_hint_textbox=0x7f040018;
         public static final int label_select_num_players=0x7f040011;
         public static final int start_button=0x7f040002;
         public static final int text_difficulty_selection=0x7f040004;
@@ -125,6 +127,7 @@ public final class R {
         public static final int title_activity_game_setup=0x7f040003;
         public static final int title_activity_log_in=0x7f04000f;
         public static final int title_activity_question=0x7f04000e;
+        public static final int title_username_enter=0x7f040016;
     }
     public static final class style {
         /** 

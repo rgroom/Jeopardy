@@ -4,27 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="${relativePackage}.${activityClass}" >
+    tools:context="${relativePackage}.${activityClass}"
+    android:gravity="center" >
 
     <TextView
         android:id="@+id/textNewUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="@string/title_username_enter"
+        android:textSize="22sp"
+        android:layout_marginBottom="20dp" />
 
     <EditText
         android:id="@+id/editUserName"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10" >
-
-        <requestFocus />
+        android:ems="10"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp" >
     </EditText>
 
     <Button
         android:id="@+id/buttonAcceptNewUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Accept" />
+        android:text="@string/button_accept_user_name"
+        android:layout_marginTop="20dp" />
 
 </LinearLayout>

@@ -22,6 +22,8 @@ public class GameBoardActivity extends Activity implements View.OnClickListener{
 	public static final String EXTRA_NUM_PLAYERS = "itp341.groom.bobby.finalproject.app.numplayers";
 	public static final String EXTRA_FIRST_PLAYER_RESULT = "itp341.groom.bobby.finalproject.app.result.first.player";
 	public static final String EXTRA_SECOND_PLAYER_RESULT = "itp341.groom.bobby.finalproject.app.result.second.player";
+	public static final String EXTRA_PLAYER_ONE_NAME = "itp341.groom.bobby.finalproject.app.result.player.one.name";
+	public static final String EXTRA_PLAYER_TWO_NAME = "itp341.groom.bobby.finalproject.app.result.player.two.name";
 
 	Button buttonRow1Col1;
 	Button buttonRow1Col2;
@@ -74,6 +76,10 @@ public class GameBoardActivity extends Activity implements View.OnClickListener{
 
 	int firstPlayerScore;
 	int secondPlayerScore;
+	int questionsAnswered;
+	
+	String player1name;
+	String player2name;
 
 
 	@Override
@@ -161,11 +167,20 @@ public class GameBoardActivity extends Activity implements View.OnClickListener{
 		dw = (DataWrapper) getIntent().getSerializableExtra(EXTRA_GAME_BOARD_QUESTIONS);
 		questions = dw.getQuestions();
 		numPlayers = (int) getIntent().getIntExtra(EXTRA_NUM_PLAYERS, 1);
+		player1name = getIntent().getStringExtra(EXTRA_PLAYER_ONE_NAME);
+		player2name = getIntent().getStringExtra(EXTRA_PLAYER_TWO_NAME);
+		
+		textPlayer1Score.setText(" $" + 0);
+		textPlayer2Score.setText(" $" + 0);
+		
 		if (numPlayers == 1) {
 			textPlayer2.setVisibility(View.INVISIBLE);
 			textPlayer2Score.setVisibility(View.INVISIBLE);
 		}
 
+		textPlayer1.setText(player1name + ": ");
+		textPlayer2.setText(player2name + ": ");
+		
 		textCol1.setText(questions.get(0).getCategory());
 		textCol2.setText(questions.get(1).getCategory());
 		textCol3.setText(questions.get(2).getCategory());
@@ -177,6 +192,7 @@ public class GameBoardActivity extends Activity implements View.OnClickListener{
 
 		firstPlayerScore = 0;
 		secondPlayerScore = 0;
+		questionsAnswered = 0;
 	}
 
 
@@ -212,19 +228,41 @@ public class GameBoardActivity extends Activity implements View.OnClickListener{
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		Log.d(TAG, "onActivityResult()");
-
+		questionsAnswered++;
 
 		if (data!=null) {
 			firstPlayerScore += data.getIntExtra(EXTRA_FIRST_PLAYER_RESULT, 0);
 			secondPlayerScore += data.getIntExtra(EXTRA_SECOND_PLAYER_RESULT, 0);
+			if (numPlayers==2) {
+				if (data.getIntExtra(EXTRA_FIRST_PLAYER_RESULT, 0) > data.getIntExtra(EXTRA_SECOND_PLAYER_RESULT, 0)) {
+					textWhosTurn.setText("Player 1, please choose a category");
+				}
+				else {
+					textWhosTurn.setText("Player 2, please choose a category");
+				}
+			}
 		}
 		//Toast.makeText(getApplicationContext(), data.getIntExtra(EXTRA_FIRST_PLAYER_RESULT, 0) + "\n" + data.getIntExtra(EXTRA_SECOND_PLAYER_RESULT, 0), Toast.LENGTH_LONG).show();
 
 		textPlayer1Score.setText(" $" + firstPlayerScore);
 		textPlayer2Score.setText(" $" + secondPlayerScore);
 
-
+		if (questionsAnswered == 30) {
+			/*Intent returnResult = new Intent();
+		returnResult.putExtra(GameBoardActivity.EXTRA_FIRST_PLAYER_RESULT, firstPlayerResult);
+		returnResult.putExtra(GameBoardActivity.EXTRA_SECOND_PLAYER_RESULT, secondPlayerResult);
+		setResult(RESULT_OK, returnResult);*/
+			Intent returnResult = new Intent();
+			returnResult.putExtra(GameSetupActivity.EXTRA_FIRST_PLAYER_RESULT, firstPlayerScore);
+			returnResult.putExtra(GameSetupActivity.EXTRA_SECOND_PLAYER_RESULT, secondPlayerScore);
+			finish();
+		}
 	}
 
 
+	@Override
+	public void onBackPressed() {
+		//super.onBackPressed();
+		return;
+	}
 }
